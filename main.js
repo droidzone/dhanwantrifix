@@ -34,8 +34,14 @@
           var add_OD= '<td><input name="buttnOD" value="OD" id="buttnOD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_BD= '<td><input name="buttnBD" value="BD" id="buttnBD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_TDS= '<td><input name="buttnTDS" value="TDS" id="buttnTDS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_MG= '<td><input name="buttnMG" value="mg" id="buttnMG" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_PUFF= '<td><input name="buttnPUFF" value="Puff" id="buttnPUFF" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+
           add_el = add_el + add_OD + add_BD + add_TDS;
           $( add_el ).insertBefore( "td>input#btnOK" );
+          // $( add_MG ).insertAfter( "tr>td>select#ddlDrugDose" );
+          $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_MG + add_PUFF + "</tr>");
+
           $('#buttnDefaults').bind('click', function() {
             console.log("Defaults..loading");
             $("#txtDrugDose").val("1");
@@ -64,6 +70,12 @@
             // OD
             $("#ddlFrequency").val("120:3:3");
           });
+          $('#buttnMG').bind('click', function() {
+            console.log("Defaults..loading");
+            // OD
+            $("#ddlDrugDose").val("92");
+          });
+
         }
 
         // var str = "Hello world, welcome to the universe.";
