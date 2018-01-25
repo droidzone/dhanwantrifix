@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       Dr Joel G Mathew, aka Droidzone
-// @match        https://gateway.esic.in/Hospital/ClinicalRecords/*
+// @match        https://gateway.esic.in/*
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
 // @require  https://code.jquery.com/jquery-3.3.1.min.js
 // @grant    GM_addStyle
@@ -16,95 +16,73 @@
     // Your code here...
     console.log("Tampermonkey user script loaded for ESI Web app");
 
-    waitForKeyElements ("select#ddlQuantityUOM", actionFunction);
+    // waitForKeyElements ("select#ddlQuantityUOM", actionFunction);
+    // function actionFunction (jNode) {
+    //     //-- DO WHAT YOU WANT TO THE TARGETED ELEMENTS HERE.
+    //     var locn = window.location.href;
+    //     console.log(locn);
+    //     if (locn.includes("Hospital/ClinicalRecords/Prescriptions.aspx")) {
+    //       console.log("Medicine selector has loaded fully.");
+    //       // Add some elements
+    //       var add_el= '<td align="left"><input name="buttnDefaults" value="Defaults" id="buttnDefaults" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       var add_OD= '<td><input name="buttnOD" value="OD" id="buttnOD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       var add_BD= '<td><input name="buttnBD" value="BD" id="buttnBD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       var add_TDS= '<td><input name="buttnTDS" value="TDS" id="buttnTDS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       var add_MG= '<td><input name="buttnMG" value="mg" id="buttnMG" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       var add_PUFF= '<td><input name="buttnPUFF" value="Puff" id="buttnPUFF" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+    //       add_el = add_el + add_OD + add_BD + add_TDS;
+    //       $( add_el ).insertBefore( "td>input#btnOK" );
+    //       $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_MG + add_PUFF + "</tr>");
+    //       $('#buttnDefaults').bind('click', function() {
+    //         $("#txtDrugDose").val("1");
+    //         $("#ddlDrugDose").val("200");
+    //         $("#txtDuration").val("30");
+    //         $("#ddlFrequency").val("28:2:3");
+    //         $("#txtQuantity").val("60");
+    //         $("#ddlQuantityUOM").val("200");
+    //         $("#ddlAdminRoute").val("1");
+    //       });
+    //       $('#buttnOD').bind('click', function() {
+    //         console.log("Defaults..loading");
+    //         // OD
+    //         $("#ddlFrequency").val("53:1:3");
+    //       });
+    //       $('#buttnBD').bind('click', function() {
+    //         console.log("Defaults..loading");
+    //         // OD
+    //         $("#ddlFrequency").val("43:2:3");
+    //       });
+    //       $('#buttnTDS').bind('click', function() {
+    //         $("#ddlFrequency").val("120:3:3");
+    //       });
+    //       $('#buttnMG').bind('click', function() {
+    //         $("#ddlDrugDose").val("92");
+    //       });
+    //       $('#buttnPUFF').bind('click', function() {
+    //         // OD
+    //         $("#ddlDrugDose").val("494");
+    //         $("#ddlAdminRoute").val("105");
+    //       });
+    //     }
+    // }
 
-
-    function actionFunction (jNode) {
-        //-- DO WHAT YOU WANT TO THE TARGETED ELEMENTS HERE.
-        // jNode.css ("background", "yellow"); // example
-
-
-        var locn = window.location.href;
-        console.log(locn);
-        if (locn.includes("Hospital/ClinicalRecords/Prescriptions.aspx")) {
-          console.log("Medicine selector has loaded fully.");
-          // Add some elements
-          var add_el= '<td align="left"><input name="buttnDefaults" value="Defaults" id="buttnDefaults" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-
-          var add_OD= '<td><input name="buttnOD" value="OD" id="buttnOD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-          var add_BD= '<td><input name="buttnBD" value="BD" id="buttnBD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-          var add_TDS= '<td><input name="buttnTDS" value="TDS" id="buttnTDS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-          var add_MG= '<td><input name="buttnMG" value="mg" id="buttnMG" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-          var add_PUFF= '<td><input name="buttnPUFF" value="Puff" id="buttnPUFF" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
-
-          add_el = add_el + add_OD + add_BD + add_TDS;
-          $( add_el ).insertBefore( "td>input#btnOK" );
-          // $( add_MG ).insertAfter( "tr>td>select#ddlDrugDose" );
-          $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_MG + add_PUFF + "</tr>");
-
-          $('#buttnDefaults').bind('click', function() {
-            console.log("Defaults..loading");
-            $("#txtDrugDose").val("1");
-            // Selecting No
-            $("#ddlDrugDose").val("200");
-            $("#txtDuration").val("30");
-            // BD
-            $("#ddlFrequency").val("28:2:3");
-            $("#txtQuantity").val("60");
-            $("#ddlQuantityUOM").val("200");
-            $("#ddlAdminRoute").val("1");
-
-          });
-          $('#buttnOD').bind('click', function() {
-            console.log("Defaults..loading");
-            // OD
-            $("#ddlFrequency").val("53:1:3");
-          });
-          $('#buttnBD').bind('click', function() {
-            console.log("Defaults..loading");
-            // OD
-            $("#ddlFrequency").val("43:2:3");
-          });
-          $('#buttnTDS').bind('click', function() {
-            console.log("Defaults..loading");
-            // OD
-            $("#ddlFrequency").val("120:3:3");
-          });
-          $('#buttnMG').bind('click', function() {
-            console.log("Defaults..loading");
-            // OD
-            $("#ddlDrugDose").val("92");
-          });
-
-        }
-
-        // var str = "Hello world, welcome to the universe.";
-        // var n = str.includes("Hospital/ClinicalRecords/Prescriptions.aspx");
-
-
-    }
-
+console.log("Fix deprecated function");
     // fix for deprecated method in Chrome 37
   if (!window.showModalDialog) {
-
      window.showModalDialog = function (arg1, arg2, arg3) {
-
         var w;
         var h;
         var resizable = "no";
         var scroll = "no";
         var status = "no";
-
         // get the modal specs
         var mdattrs = arg3.split(";");
         for (i = 0; i < mdattrs.length; i++) {
            var mdattr = mdattrs[i].split(":");
-
            var n = mdattr[0];
            var v = mdattr[1];
            if (n) { n = n.trim().toLowerCase(); }
            if (v) { v = v.trim().toLowerCase(); }
-
            if (n == "dialogheight") {
               h = v.replace("px", "");
            } else if (n == "dialogwidth") {
@@ -117,13 +95,11 @@
               status = v;
            }
         }
-
         var left = window.screenX + (window.outerWidth / 2) - (w / 2);
         var top = window.screenY + (window.outerHeight / 2) - (h / 2);
         console.log("Opening window with name:"+arg1);
         var targetWin = window.open(arg1, arg1, 'toolbar=no, location=no, directories=no, status=' + status + ', menubar=no, scrollbars=' + scroll + ', resizable=' + resizable + ', copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-
-         function ShowMedsReceived(data) {
+        function ShowMedsReceived(data) {
            var itemid = 0;
            var itemName = '';
            var genericid = 0;
@@ -140,7 +116,6 @@
                }
                var temptable = document.getElementById('tblFUP');
                for (var j = 1; j < temptable.rows.length; j++) {
-
                    if (temptable.rows[j].children[3].innerHTML == 0) {
                        var itemid = temptable.rows[j].children[1].innerHTML;
                        var itemName = temptable.rows[j].children[2].innerHTML;
@@ -153,10 +128,6 @@
                        var itemid = 0;
                        var itemName = '';
                    }
-
-                   //                for (var k = 0; k < temptable.rows[j].children.Count; k++) {
-                   //
-                   //                }
 
                    var CurrentrowNo = grid.rows.length;
 
