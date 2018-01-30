@@ -4,6 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
+// @match        http://his.esic.in:6002/*
 // @match        https://gateway.esic.in/Hospital/ClinicalRecords/Prescriptions.aspx*
 // @grant        none
 // ==/UserScript==
