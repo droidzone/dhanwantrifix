@@ -154,6 +154,17 @@
           return false;
         }
  */
+	function UnlockAll() {
+		$("#txtDuration").prop('disabled', false);
+		$("#ddlDrugDose").prop('disabled', false);
+		$("#txtDrugDose").prop('disabled', false);
+		$("#ddlDuration").prop('disabled', false);
+		$("#txtQuantity").prop('disabled', false);
+		$("#ddlQuantityUOM").prop('disabled', false);
+		$("#txtDuration").prop('disabled', false);
+		$("#txtDuration").prop('disabled', false);
+		$("#txtDuration").prop('disabled', false);
+	}
 
 
     function actionFunction (jNode) {
@@ -172,6 +183,7 @@
           var add_Stat= '<td><input name="buttnStat" value="Stat" id="buttnStat" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_HS= '<td><input name="buttnHS" value="HS" id="buttnHS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_NO= '<td><input name="buttnNO" value="No" id="buttnNO" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_TAB= '<td><input name="buttnTab" value="Tab" id="buttnTab" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_MG= '<td><input name="buttnMG" value="mg" id="buttnMG" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_PUFF= '<td><input name="buttnPUFF" value="Puff" id="buttnPUFF" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_Before= '<td><input name="buttn_Before" value="Before" id="buttn_Before" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
@@ -181,6 +193,8 @@
           var add_IV= '<td><input name="buttn_Injn" value="IV" id="buttn_Injn_IV" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           // add_el = add_el + add_OD + add_BD + add_TDS;
           $("td>input#btnOK").parent().parent().prepend( add_el );
+          $("tr>td>select#ddlQuantityUOM").parent().parent().append( "<tr>" + add_NO +  add_TAB + "</tr>");
+
           // $( add_el ).insertBefore( "td>input#btnOK" );
           $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_NO + add_MG + add_PUFF + "</tr>");
           var add_Durn = '<td><input name="buttn5D" value="5D" id="buttn5D" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>'+
@@ -193,10 +207,9 @@
           $("tr>td>select#ddlAdminRoute").parent().append( "<tr>" + add_Inhal +  add_IM  + add_IV + "</tr>");
 
 
-
+		UnlockAll();
           $('#buttnDefaults').bind('click', function() {
-            $("#txtDuration").prop('disabled', false);
-              $("#ddlDuration").prop('disabled', false);
+            UnlockAll();
 
             $("#txtDrugDose").val("1");
             $("#ddlDrugDose").val("200");
@@ -209,20 +222,30 @@
           $('#buttn5D').bind('click', function() {
             $("#txtDuration").val("5");
             $("#ddlDuration").val("3");
-            $("#ddlDuration").prop('disabled', false);
+            UnlockAll();
             CalculateTotalStrength();
           });
+		  $('#buttnTab').bind('click', function() {
+            $("#ddlQuantityUOM").val("213");
+            UnlockAll();
+            CalculateTotalStrength();
+          });
+
+
           $('#buttn_Inhal').bind('click', function() {
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("105");
+			UnlockAll();
           });
           $('#buttn_Injn_IM').bind('click', function() {
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("43");
+			UnlockAll();
           });
           $('#buttn_Injn_IV').bind('click', function() {
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("107");
+			UnlockAll();
           });
 
 
@@ -230,41 +253,49 @@
             $("#txtDuration").val("14");
             $("#ddlDuration").val("3");
             $("#ddlDuration").prop('disabled', false);
+			UnlockAll();
             CalculateTotalStrength();
           });
           $('#buttn1M').bind('click', function() {
             $("#txtDuration").val("30");
             $("#ddlDuration").val("3");
             CalculateTotalStrength();
-            $("#ddlDuration").prop('disabled', false);
+            UnlockAll();
           });
 
           $('#buttn_Before').bind('click', function() {
             $("#txtRemarks").val("Before food");
+			UnlockAll();
           });
           $('#buttn_After').bind('click', function() {
             $("#txtRemarks").val("After food");
+			UnlockAll();
           });
 
 
           $('#buttnOD').bind('click', function() {
             $("#ddlFrequency").val("53:1:3");
+			UnlockAll();
             ddlFrequency_OnChange();
           });
           $('#buttnBD').bind('click', function() {
             $("#ddlFrequency").val("43:2:3");
+			UnlockAll();
             ddlFrequency_OnChange();
           });
           $('#buttnTDS').bind('click', function() {
             $("#ddlFrequency").val("120:3:3");
+			UnlockAll();
             ddlFrequency_OnChange();
           });
           $('#buttnHS').bind('click', function() {
             $("#ddlFrequency").val("128:1:3");
+			UnlockAll();
             ddlFrequency_OnChange();
           });
           $('#buttnSOS').bind('click', function() {
             $("#ddlFrequency").val("118:0:0");
+			UnlockAll();
             CalculateTotalStrength();
 
           });
@@ -276,6 +307,7 @@
             var unitseld = $("#ddlDrugDose option:selected").text();
             $("#ddlQuantityUOM option:selected").text(unitseld);
             $("#txtQuantity").val(valseld);
+			UnlockAll();
 
             // CalculateTotalStrength();
           });
@@ -284,10 +316,12 @@
 
           $('#buttnMG').bind('click', function() {
             $("#ddlDrugDose").val("92");
+			UnlockAll();
           });
           $('#buttnNO').bind('click', function() {
             $("#txtDrugDose").val("1");
             $("#ddlDrugDose").val("200");
+			UnlockAll();
             CalculateTotalStrength();
           });
 
@@ -295,6 +329,7 @@
             // OD
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("105");
+			UnlockAll();
           });
         }
     }
