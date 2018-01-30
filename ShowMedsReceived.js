@@ -12,13 +12,6 @@
 (function() {
     'use strict';
 
-    $('#btnDrug').off('click');
-    $('#btnDrug').on('click', function() {
-        /* Do stuff */
-        //alert("Hikjacked");
-    });
-
-
     function ShowMedsReceived(data) {
            var itemid = 0;
            var itemName = '';
