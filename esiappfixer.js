@@ -5,6 +5,7 @@
 // @description  try to take over the world!
 // @author       Dr Joel G Mathew, aka Droidzone
 // @match        https://gateway.esic.in/*
+// @match        http://his.esic.in:6002/*
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
 // @require  https://code.jquery.com/jquery-3.3.1.min.js
 // @grant    none
@@ -13,16 +14,18 @@
 (function() {
     'use strict';
 
-    // Your code here...
+    // Your codhere...
     console.log("Tampermonkey user script loaded for ESI Web app");
-
+	//Inserting code in Medicine module
+    console.log("Inserting code in Medicine module");
     waitForKeyElements ("select#ddlQuantityUOM", actionFunction);
+
     function ddlFrequency_OnChange() {
       var ddlFrequency = document.getElementById("ddlFrequency");
       var ddlFrequencySelectedValue = ddlFrequency.options[ddlFrequency.selectedIndex].value;
       var arrFrequencySelectedValue = ddlFrequencySelectedValue.split(':');
       if (arrFrequencySelectedValue.length != 0) {
-          document.getElementById("hdnFrequencyID").value = arrFrequencySelectedValue[0]
+          document.getElementById("hdnFrequencyID").value = arrFrequencySelectedValue[0];
           _selectedFrequencyId = arrFrequencySelectedValue[0];
           _selectedFrequencyQty = arrFrequencySelectedValue[1];
           _selectedFrequencyUOMId = arrFrequencySelectedValue[2];
@@ -31,19 +34,19 @@
       return false;
     }
 
-    function CalculateTotalStrength() {
+    /* function CalculateTotalStrength() {
           if (document.getElementById("ddlDuration").selectedIndex != '-1') {
               document.getElementById("hdnDurationID").value = document.getElementById("ddlDuration").options[document.getElementById("ddlDuration").selectedIndex].value;
           }
           else {
-              alert('Select Duration')
+              alert('Select Duration');
               return false;
           }
           if (document.getElementById("ddlDuration").selectedIndex != '-1') {
               document.getElementById("hdnDurationText").value = document.getElementById("ddlDuration").options[document.getElementById("ddlDuration").selectedIndex].text;
           }
           else {
-              alert('Select Duration')
+              alert('Select Duration');
               return false;
           }
           // document.getElementById("hdnDrugdoseID").value = document.getElementById("ddlDrugDose").options[document.getElementById("ddlDrugDose").selectedIndex].value;
@@ -51,14 +54,14 @@
               document.getElementById("hdnDrugdoseID").value = document.getElementById("ddlDrugDose").options[document.getElementById("ddlDrugDose").selectedIndex].value;
           }
           else {
-              alert('Select Dose')
+              alert('Select Dose');
               return false;
           }
           if (document.getElementById("ddlDrugDose").selectedIndex != '-1') {
               document.getElementById("hdnDrugdoseText").value = document.getElementById("ddlDrugDose").options[document.getElementById("ddlDrugDose").selectedIndex].text;
           }
           else {
-              alert('Select Dose')
+              alert('Select Dose');
               return false;
           }
 
@@ -146,24 +149,16 @@
                   }
 
               }
-              //                else {
-              //                    document.getElementById("PrescriptionContainer_tbpnlMedications_txtQuantity").value = dayDose;
-              //                    if (ddlDose.options[ddlDose.selectedIndex].value != 0) {
-              //                        document.getElementById("PrescriptionContainer_tbpnlMedications_ddlQuantityUOM").value = ddlDose.options[ddlDose.selectedIndex].value;
-              //                    }
-              //                    else {
-              //                        document.getElementById("PrescriptionContainer_tbpnlMedications_ddlQuantityUOM").innerText = '';
-              //                    }
-              //                }
           }
 
           return false;
         }
-
+ */
 
 
     function actionFunction (jNode) {
         //-- DO WHAT YOU WANT TO THE TARGETED ELEMENTS HERE.
+        console.log("actionFunction loading");
         var locn = window.location.href;
         console.log(locn);
         if (locn.includes("Hospital/ClinicalRecords/Prescriptions.aspx")) {
