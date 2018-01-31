@@ -34,19 +34,19 @@
       return false;
     }
 
-    /* function CalculateTotalStrength() {
+     function CalculateTotalStrength() {
           if (document.getElementById("ddlDuration").selectedIndex != '-1') {
               document.getElementById("hdnDurationID").value = document.getElementById("ddlDuration").options[document.getElementById("ddlDuration").selectedIndex].value;
           }
           else {
-              alert('Select Duration');
+              // alert('Select Duration');
               return false;
           }
           if (document.getElementById("ddlDuration").selectedIndex != '-1') {
               document.getElementById("hdnDurationText").value = document.getElementById("ddlDuration").options[document.getElementById("ddlDuration").selectedIndex].text;
           }
           else {
-              alert('Select Duration');
+              // alert('Select Duration');
               return false;
           }
           // document.getElementById("hdnDrugdoseID").value = document.getElementById("ddlDrugDose").options[document.getElementById("ddlDrugDose").selectedIndex].value;
@@ -153,7 +153,7 @@
 
           return false;
         }
- */
+
 	function UnlockAll() {
 		$("#txtDuration").prop('disabled', false);
 		$("#ddlDrugDose").prop('disabled', false);
@@ -183,28 +183,35 @@
           var add_Stat= '<td><input name="buttnStat" value="Stat" id="buttnStat" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_HS= '<td><input name="buttnHS" value="HS" id="buttnHS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_NO= '<td><input name="buttnNO" value="No" id="buttnNO" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_ml= '<td><input name="buttnML" value="mL" id="buttnML" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_NO1= '<td><input name="buttnNO1" value="No" id="buttnNO1" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_TAB= '<td><input name="buttnTab" value="Tab" id="buttnTab" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_MG= '<td><input name="buttnMG" value="mg" id="buttnMG" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_PUFF= '<td><input name="buttnPUFF" value="Puff" id="buttnPUFF" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_Before= '<td><input name="buttn_Before" value="Before" id="buttn_Before" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_After= '<td><input name="buttn_After" value="After" id="buttn_After" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_Oral= '<td><input name="buttn_add_Oral" value="Oral" id="buttn_Oral" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_Inhal= '<td><input name="buttn_Inhal" value="Inhal" id="buttn_Inhal" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_Subcut= '<td><input name="buttn_Subcut" value="Subcut" id="buttn_Subcut" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_IM= '<td><input name="buttn_Injn" value="IM" id="buttn_Injn_IM" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_IV= '<td><input name="buttn_Injn" value="IV" id="buttn_Injn_IV" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           // add_el = add_el + add_OD + add_BD + add_TDS;
+          $("#lblSchedule").parent().parent().hide();
+          $("#PrescriptionContainer_tbpnlMedications_Label66").parent().parent().hide();
           $("td>input#btnOK").parent().parent().prepend( add_el );
-          $("tr>td>select#ddlQuantityUOM").parent().parent().append( "<tr>" + add_NO +  add_TAB + "</tr>");
+          $("tr>td>select#ddlQuantityUOM").parent().parent().append( "<tr>" + add_NO1 +  add_TAB + "</tr>");
+          $("input#txtRemarks").parent().parent().append( "<tr>" + add_Before +  add_After  + "</tr>");
 
           // $( add_el ).insertBefore( "td>input#btnOK" );
-          $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_NO + add_MG + add_PUFF + "</tr>");
+          $("tr>td>select#ddlDrugDose").parent().parent().append( "<tr>" + add_NO + add_MG + add_ml + add_PUFF + "</tr>");
           var add_Durn = '<td><input name="buttn5D" value="5D" id="buttn5D" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>'+
                          '<td><input name="buttn2W" value="2W" id="buttn2W" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>'+
                          '<td><input name="buttn1M" value="1M" id="buttn1M" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           $("tr>td>select#ddlDuration").parent().parent().append( "<tr>" + add_Durn + "</tr>");
           $("tr>td>select#ddlFrequency").parent().append( "<tr>" + add_OD +  add_BD + add_TDS + add_HS + add_SOS + add_Stat + "</tr>");
-          $("input#txtSchedule").parent().append( "<tr>" + add_Before +  add_After  + "</tr>");
 
-          $("tr>td>select#ddlAdminRoute").parent().append( "<tr>" + add_Inhal +  add_IM  + add_IV + "</tr>");
+
+          $("tr>td>select#ddlAdminRoute").parent().append( "<tr>" + add_Oral + add_Inhal +  add_Subcut + add_IM  + add_IV + "</tr>");
 
 
 		UnlockAll();
@@ -235,8 +242,18 @@
           $('#buttn_Inhal').bind('click', function() {
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("105");
-			UnlockAll();
+			         UnlockAll();
           });
+          $('#buttn_Subcut').bind('click', function() {
+            $("#ddlAdminRoute").val("41");
+            UnlockAll();
+          });
+
+          $('#buttn_Oral').bind('click', function() {
+            $("#ddlAdminRoute").val("26");
+               UnlockAll();
+          });
+
           $('#buttn_Injn_IM').bind('click', function() {
             $("#ddlDrugDose").val("494");
             $("#ddlAdminRoute").val("43");
@@ -321,10 +338,22 @@
           $('#buttnNO').bind('click', function() {
             $("#txtDrugDose").val("1");
             $("#ddlDrugDose").val("200");
-			UnlockAll();
+			         UnlockAll();
+            CalculateTotalStrength();
+          });
+          $('#buttnML').bind('click', function() {
+            $("#txtDrugDose").val("5");
+            $("#ddlDrugDose").val("120");
+               UnlockAll();
             CalculateTotalStrength();
           });
 
+
+          $('#buttnNO1').bind('click', function() {
+            $("#ddlQuantityUOM").val("200");
+               UnlockAll();
+            CalculateTotalStrength();
+          });
           $('#buttnPUFF').bind('click', function() {
             // OD
             $("#ddlDrugDose").val("494");
