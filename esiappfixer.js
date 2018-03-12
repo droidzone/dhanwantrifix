@@ -92,7 +92,7 @@
                       break;
                   }
               }
-              ddlDuration.disabled = true;
+
           }
           else {
               ddlDuration.disabled = false;
@@ -162,9 +162,59 @@
 		$("#txtQuantity").prop('disabled', false);
 		$("#ddlQuantityUOM").prop('disabled', false);
 		$("#txtDuration").prop('disabled', false);
-		$("#txtDuration").prop('disabled', false);
-		$("#txtDuration").prop('disabled', false);
+        $("#txtDuration").removeAttr("disabled");
+        $("#ddlDrugDose").removeAttr("disabled");
+        $("#txtDrugDose").removeAttr("disabled");
+        $("#ddlDuration").removeAttr("disabled");
+        $("#txtQuantity").removeAttr("disabled");
+        $("#ddlQuantityUOM").removeAttr("disabled");
+        RemoveOnChange();
 	}
+
+  function RemoveOnChange() {
+    $("#txtDuration").off('change');
+		$("#ddlDrugDose").off('change');
+		$("#txtDrugDose").off('change');
+		$("#ddlDuration").off('change');
+		$("#txtQuantity").off('change');
+		$("#ddlQuantityUOM").off('change');
+		$("#txtDuration").off('change');
+    $("#ddlDuration").replaceWith('<select name="ddlDuration" id="ddlDuration" class="dropdown" style="width: 105px;"><option value="3">Days</option><option value="4">Hours</option><option value="5">Minutes</option><option value="2">Months</option><option value="6">Seconds</option><option value="7">Weeks</option><option value="1">Years</option></select>');
+    $("#txtDrugDose").replaceWith('<input name="txtDrugDose" maxlength="5" id="txtDrugDose" class="textboxname" style="width:35px;" type="text">');
+
+    $("#ddlDrugDose").replaceWith(`<select name="ddlDrugDose" id="ddlDrugDose" style="width: 110px;">
+       <option value="0">--Select--</option>
+       <option value="200">No(s)</option>
+       <option value="92">mg</option>
+       <option value="120">ml</option>
+       <option value="403">mcg (microgram)</option>
+       <option value="484">Ampoule(s)</option>
+       <option value="540">Vial(s)</option>
+       <option value="488">Bottle(s)</option>
+       <option value="183">Capsule(s)</option>
+       <option value="491">Cartridge(s)</option>
+       <option value="494">Dose(s)</option>
+       <option value="496">Drop(s)</option>
+       <option value="390">gm</option>
+       <option value="404">IU</option>
+       <option value="512">mg %</option>
+       <option value="523">Penfill(s)</option>
+       <option value="591">Spray</option>
+       <option value="213">Tablet(s)</option>
+       <option value="594">Teaspoon</option>
+    </select>`);
+
+    $("#ddlFrequency").replaceWith(`<select name="ddlFrequency" id="ddlFrequency" class="dropdown">
+        <option value="0">Select</option>
+        <option value="43:2:3">BD - 2 times a day</option>
+        <option value="53:1:3">OD - Once a Day</option>
+        <option value="107:4:3">QID - 4 times a day</option>
+        <option value="118:0:0">SOS - As and when necessary</option>
+        <option value="119:1:3">Stat - Now</option>
+        <option value="120:3:3">TDS - 3 times a day</option>
+        <option value="128:1:3">HS - Once at night</option>
+    </select>`);
+  }
 
 
     function actionFunction (jNode) {
@@ -176,6 +226,7 @@
           console.log("Medicine selector has loaded fully.");
           // Add some elements
           var add_el= '<td align="left"><input name="buttnDefaults" value="Defaults" id="buttnDefaults" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_unlock= '<td align="left"><input name="btnUnlockAll" value="Unlock All" id="btnUnlockAll" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_OD= '<td><input name="buttnOD" value="OD" id="buttnOD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_BD= '<td><input name="buttnBD" value="BD" id="buttnBD" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_TDS= '<td><input name="buttnTDS" value="TDS" id="buttnTDS" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
@@ -195,11 +246,16 @@
           var add_Subcut= '<td><input name="buttn_Subcut" value="Subcut" id="buttn_Subcut" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_IM= '<td><input name="buttn_Injn" value="IM" id="buttn_Injn_IM" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           var add_IV= '<td><input name="buttn_Injn" value="IV" id="buttn_Injn_IV" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_q10= '<td><input name="btn10" value="10" id="btn10" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_q15= '<td><input name="btn15" value="15" id="btn15" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_q30= '<td><input name="btn30" value="30" id="btn30" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_q45= '<td><input name="btn45" value="45" id="btn45" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
+          var add_q60= '<td><input name="btn60" value="60" id="btn60" style="background-repeat: repeat-x; background-color: #9c2821; height: 25px; width: 47px; padding: 3px; border: 0px; color: #fff; font-size: 11px;cursor: pointer;" type="button"></td>';
           // add_el = add_el + add_OD + add_BD + add_TDS;
           $("#lblSchedule").parent().parent().hide();
           $("#PrescriptionContainer_tbpnlMedications_Label66").parent().parent().hide();
-          $("td>input#btnOK").parent().parent().prepend( add_el );
-          $("tr>td>select#ddlQuantityUOM").parent().parent().append( "<tr>" + add_NO1 +  add_TAB + "</tr>");
+          $("td>input#btnOK").parent().parent().prepend( add_el + add_unlock);
+          $("tr>td>select#ddlQuantityUOM").parent().parent().append( "<tr>" + add_q10 + add_q15 + add_q30 + add_q45 + add_q60 + add_NO1 +  add_TAB + "</tr>");
           $("input#txtRemarks").parent().parent().append( "<tr>" + add_Before +  add_After  + "</tr>");
 
           // $( add_el ).insertBefore( "td>input#btnOK" );
@@ -215,13 +271,39 @@
 
 
 		UnlockAll();
+            $('#btnUnlockAll').bind('click', function() {
+              UnlockAll();
+              // RemoveOnChange();
+            });
+
+            $('#btn10').bind('click', function() {
+              UnlockAll();
+              $("#txtQuantity").val(10);
+            });
+            $('#btn15').bind('click', function() {
+              UnlockAll();
+              $("#txtQuantity").val(15);
+            });
+            $('#btn30').bind('click', function() {
+              UnlockAll();
+              $("#txtQuantity").val(30);
+            });
+            $('#btn45').bind('click', function() {
+              UnlockAll();
+              $("#txtQuantity").val(45);
+            });
+            $('#btn60').bind('click', function() {
+              UnlockAll();
+              $("#txtQuantity").val(60);
+            });
+
           $('#buttnDefaults').bind('click', function() {
             UnlockAll();
 
             $("#txtDrugDose").val("1");
             $("#ddlDrugDose").val("200");
             $("#txtDuration").val("30");
-            $("#ddlFrequency").val("28:2:3");
+            $("#ddlFrequency").val("43:2:3");
             $("#txtQuantity").val("60");
             $("#ddlQuantityUOM").val("200");
             $("#ddlAdminRoute").val("1");
@@ -369,8 +451,8 @@ console.log("Fix deprecated function");
      window.showModalDialog = function (arg1, arg2, arg3) {
         var w;
         var h;
-        var resizable = "no";
-        var scroll = "no";
+        var resizable = "yes";
+        var scroll = "yes";
         var status = "no";
         // get the modal specs
         var mdattrs = arg3.split(";");
@@ -395,7 +477,7 @@ console.log("Fix deprecated function");
         var left = window.screenX + (window.outerWidth / 2) - (w / 2);
         var top = window.screenY + (window.outerHeight / 2) - (h / 2);
         console.log("Opening window with name:"+arg1);
-        var targetWin = window.open(arg1, arg1, 'toolbar=no, location=no, directories=no, status=' + status + ', menubar=no, scrollbars=' + scroll + ', resizable=' + resizable + ', copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+        var targetWin = window.open(arg1, arg1, 'toolbar=yes, location=yes, directories=no, status=' + status + ', menubar=no, scrollbars=' + scroll + ', resizable=' + resizable + ', copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 
 
          function receiveMessage(event)
