@@ -477,7 +477,13 @@ console.log("Fix deprecated function");
         var left = window.screenX + (window.outerWidth / 2) - (w / 2);
         var top = window.screenY + (window.outerHeight / 2) - (h / 2);
         console.log("Opening window with name:"+arg1);
-        var targetWin = window.open(arg1, arg1, 'toolbar=yes, location=yes, directories=no, status=' + status + ', menubar=no, scrollbars=' + scroll + ', resizable=' + resizable + ', copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+        var window_options ='toolbar=yes, location=yes, directories=no, status=' + status + ', menubar=no, scrollbars=' + scroll + ', resizable=' + resizable + ', copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left;
+        console.log("Window options:"+window_options);
+        //var targetWin = window.open(arg1, arg1, window_options);
+        var targetWin = window.open(arg1, '_blank', window_options);
+        targetWin.focus();
+        console.log('Window is opened if value is obj. Value:');
+        console.log(targetWin);
 
 
          function receiveMessage(event)
