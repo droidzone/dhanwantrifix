@@ -7,7 +7,7 @@
 // @match        https://gateway.esic.in/*
 // @match        http://his.esic.in:6002/*
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
-// @require  https://code.jquery.com/jquery-3.3.1.min.js
+// @require  https://code.jquery.com/jquery-3.4.1.min.js
 // @grant    none
 // ==/UserScript==
 
@@ -19,6 +19,40 @@
 	//Inserting code in Medicine module
     console.log("Inserting code in Medicine module");
     waitForKeyElements ("select#ddlQuantityUOM", actionFunction);
+    waitForKeyElements ("#ctl00_cphpage_tblforOP", ModifyOPCaseSheet);
+
+
+    function ModifyOPCaseSheet() {
+        console.log("Modifying case sheet");
+        var elementtoinsert = `
+        <div style="padding: 3px;" align="left">
+
+              <button id="btnP1" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
+                  width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Generate P1</button>
+
+          </div>
+        `
+        $("table.formlevel:nth-child(9)").before(elementtoinsert)
+
+
+        $('body').on('click', '#btnP1', function() {
+          var p1el = "ctl00_cphpage_trvSectionst17"
+          var p1link = $("#" + p1el).attr('href')
+
+          var matches = p1link.match(/\((.*?)\)/);
+
+          if (matches) {
+              p1link = matches[1];
+              p1link = p1link.split(",");
+              p1link = p1link[0]
+              p1link = p1link.substring(1);
+              p1link = p1link.slice(0,-1)
+          }
+          console.log(`Link is ${p1link}`)
+          var win = window.open(p1link, '_blank');
+          win.focus();
+        });
+    }
 
     function ddlFrequency_OnChange() {
       var ddlFrequency = document.getElementById("ddlFrequency");
