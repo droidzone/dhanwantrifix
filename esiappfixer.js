@@ -29,6 +29,8 @@
 
               <button id="btnP1" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
                   width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Generate P1</button>
+              <button id="btnInv" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
+                      width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Investigations</button>
 
           </div>
         `
@@ -36,22 +38,29 @@
 
 
         $('body').on('click', '#btnP1', function() {
-          var p1el = "ctl00_cphpage_trvSectionst17"
-          var p1link = $("#" + p1el).attr('href')
-
-          var matches = p1link.match(/\((.*?)\)/);
-
-          if (matches) {
-              p1link = matches[1];
-              p1link = p1link.split(",");
-              p1link = p1link[0]
-              p1link = p1link.substring(1);
-              p1link = p1link.slice(0,-1)
-          }
-          console.log(`Link is ${p1link}`)
-          var win = window.open(p1link, '_blank');
-          win.focus();
+          OpenDesignatedLink("ctl00_cphpage_trvSectionst17")
         });
+
+        $('body').on('click', '#btnInv', function() {
+          OpenDesignatedLink("ctl00_cphpage_trvSectionst13")
+        });
+    }
+
+    function OpenDesignatedLink(tag) {
+      var p1link = $("#" + tag).attr('href')
+
+      var matches = p1link.match(/\((.*?)\)/);
+
+      if (matches) {
+          p1link = matches[1];
+          p1link = p1link.split(",");
+          p1link = p1link[0]
+          p1link = p1link.substring(1);
+          p1link = p1link.slice(0,-1)
+      }
+      console.log(`Link is ${p1link}`)
+      var win = window.open(p1link, '_blank');
+      win.focus();
     }
 
     function ddlFrequency_OnChange() {
