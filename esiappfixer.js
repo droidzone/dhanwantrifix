@@ -26,7 +26,8 @@
         console.log("Modifying case sheet");
         var elementtoinsert = `
         <div style="padding: 3px;" align="left">
-
+            <button id="btnDiag" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
+            width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Diagnosis</button>
               <button id="btnP1" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
                   width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Generate P1</button>
               <button id="btnInv" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
@@ -40,6 +41,13 @@
         $('body').on('click', '#btnP1', function() {
           OpenDesignatedLink("ctl00_cphpage_trvSectionst17")
         });
+
+        $('body').on('click', '#btnDiag', function() {
+          OpenDesignatedLink("ctl00_cphpage_trvSectionst9")
+        });
+
+
+
 
         $('body').on('click', '#btnInv', function() {
           OpenDesignatedLink("ctl00_cphpage_trvSectionst13")
