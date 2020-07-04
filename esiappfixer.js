@@ -7,12 +7,18 @@
 // @match        https://gateway.esic.in/*
 // @match        http://his.esic.in:6002/*
 // @require  https://gist.github.com/raw/2625891/waitForKeyElements.js
-// @require  https://code.jquery.com/jquery-3.4.1.min.js
+// @require  https://code.jquery.com/jquery-3.5.1.min.js
 // @grant    none
 // ==/UserScript==
 
 (function() {
     'use strict';
+	if(!window.jQuery) {
+		console.log(`jQuery could not be loaded!`);
+	} else {
+		console.log(`jQuery loaded successfully..`);
+	}
+		
 
     // Your codhere...
     console.log("Tampermonkey user script loaded for ESI Web app");
@@ -32,10 +38,13 @@
                   width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Generate P1</button>
               <button id="btnInv" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
                       width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Investigations</button>
+			  <button id="btnWorkList" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
+                      width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Worklist</button>
 
           </div>
         `
-        $("table.formlevel:nth-child(9)").before(elementtoinsert)
+		
+        $("table.formlevel:nth-child(10)").before(elementtoinsert)
 
 
         $('body').on('click', '#btnP1', function() {
@@ -52,6 +61,18 @@
         $('body').on('click', '#btnInv', function() {
           OpenDesignatedLink("ctl00_cphpage_trvSectionst13")
         });
+		
+		$('body').on('click', '#btnWorkList', function() {
+          var worklist_link = $("html body div#wrapper form#aspnetForm div#ctl00_updatepanelmain div.menu table tbody tr.menu td div#ctl00_menupanel div#ctl00_Menu1n3Items.ctl00_Menu1_0.IE8Fix.ctl00_Menu1_7 table tbody tr#ctl00_Menu1n9 td table.ctl00_Menu1_6 tbody tr td div.dmenu ul.d1menubar li a")[2];
+		
+			console.log(`worklist link is ${worklist_link}`);
+			
+			var win = window.open(worklist_link, '_self');
+			win.focus();
+			
+        });
+			
+		
     }
 
     function OpenDesignatedLink(tag) {
