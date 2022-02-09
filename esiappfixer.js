@@ -3,6 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
+// @grant          GM_addStyle
 // @author       Dr Joel G Mathew, aka Droidzone
 // @match        https://gateway.esic.in/*
 // @match        http://his.esic.in:6002/*
@@ -10,6 +11,18 @@
 // @require  https://code.jquery.com/jquery-3.5.1.min.js
 // @grant    none
 // ==/UserScript==
+// function GM_addStyle(css) {
+  // const style = document.getElementById("GM_addStyleBy8626") || (function() {
+    // const style = document.createElement('style');
+    // style.type = 'text/css';
+    // style.id = "GM_addStyleBy8626";
+    // document.head.appendChild(style);
+    // return style;
+  // })();
+  // const sheet = style.sheet;
+  // sheet.insertRule(css, (sheet.rules || sheet.cssRules || []).length);
+// }
+
 
 (function() {
     'use strict';
@@ -18,7 +31,15 @@
 	} else {
 		console.log(`jQuery loaded successfully..`);
 	}
-		
+	
+	function addCss(cssString) {
+		var head = document.getElementsByTagName('head')[0];
+		var newCss = document.createElement('style');
+		newCss.type = "text/css";
+		newCss.innerHTML = cssString;
+		head.appendChild(newCss);
+	}
+
 
     // Your codhere...
     console.log("Tampermonkey user script loaded for ESI Web app");
@@ -26,53 +47,98 @@
     console.log("Inserting code in Medicine module");
     waitForKeyElements ("select#ddlQuantityUOM", actionFunction);
     waitForKeyElements ("#ctl00_cphpage_tblforOP", ModifyOPCaseSheet);
+	
+	addCss(".btnspljoel { background-color: #5653ac !important; } /* CSS etc, etc */");
+	$(".menu").css('background-image', 'none');
+	$(".menu").css('background-color', 'rgb(10, 134, 117)');
+	// tr.menu > td:nth-child(1) > img:nth-child(1)
+	$("tr.menu td:nth-child(1) img:nth-child(1)").removeAttr('src')
+	$("tr.menu td:nth-child(1) img:nth-child(1)").show();
+	
+	$("tr.menu td:nth-child(4) img:nth-child(1)").removeAttr('src')
+	$("tr.menu td:nth-child(4) img:nth-child(1)").show();
 
-
+	$('.gridrowstyle').removeAttr("style");
+	$('.gridalterstyle').removeAttr("style");
+	$('.gridalterstyle').css('background-color', '#baddc9;');
+	$('.gridrowstyle').css('background-color', '#baddc9;');
+	$('.gridrowstyle').show();
+	
+	addCss(".gridrowstyle { background-color: #baddc9 !important; } /* CSS etc, etc */");
+	addCss(".gridalterstyle { background-color: #88c3df !important; } /* CSS etc, etc */");
+	
+	$("#ctl00_ImageButton1").removeAttr('src')
+	
+	// $(".maincontent h1").css('background', '');
+	// $(".maincontent").css('background', 'none');
+	// $(".maincontent").css('background-color', 'rgb(10, 134, 117)');
+	$(".maincontent h1").css('background', 'none');
+	
+	addCss(".gridheader { background-color: #cdc2f2 !important; } /* CSS etc, etc */");
+	$('tr.gridheader').show();
+	
+	$(".maincontent h1:nth-child(2)").css('background', '');
+	addCss(".maincontent h1{ background: ''; }");
+	
+	$("#header .logo").css('background', 'none');
+	$("#header .logo").css('background-image', 'url("https://m.media-amazon.com/images/I/7187xwhSDcL._SX679_.jpg")');
+	
     function ModifyOPCaseSheet() {
         console.log("Modifying case sheet");
         var elementtoinsert = `
-        <div style="padding: 3px;" align="left">
-            <button id="btnDiag" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
-            width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Diagnosis</button>
-              <button id="btnP1" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
-                  width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Generate P1</button>
-              <button id="btnInv" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
-                      width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Investigations</button>
-			  <button id="btnWorkList" style="font-weight:bold;background-repeat: repeat-x; background-color: #9c2821; height: 25px;
-                      width: 100px; padding: 3px; border: 0px; color: #FFF; font-size: 11px;">Worklist</button>
 
-          </div>
+            <button id="btnDiag" class="btnNormal link-to-btn btnspljoel">Diag</button>
+              <button id="btnP1" class="btnNormal link-to-btn btnspljoel">P1</button>
+              <button id="btnInv" class="btnNormal link-to-btn btnspljoel">Tests</button>
+			  <button id="btnWorkList" class="btnNormal link-to-btn btnspljoel">Worklist</button>
+
+
         `
+
+        // $("table.formlevel:nth-child(10)").before(elementtoinsert)
 		
-        $("table.formlevel:nth-child(10)").before(elementtoinsert)
+		$("#ctl00_cphpage_Panel13").before(elementtoinsert)
+		console.log("Element inserted now")
+		
+		
+	
 
 
         $('body').on('click', '#btnP1', function() {
-          OpenDesignatedLink("ctl00_cphpage_trvSectionst17")
+			
+			var p1link = $('a:contains("DIAGNOSIS")').attr('href');
+			console.log(`p1link for P1 element is `, p1link)
+			var win = window.open(p1link, '_blank');
+			win.focus();
+
+			// OpenDesignatedLink("ctl00_cphpage_trvSectionst16")
+		  return
         });
 
         $('body').on('click', '#btnDiag', function() {
-          OpenDesignatedLink("ctl00_cphpage_trvSectionst9")
+          OpenDesignatedLink("ctl00_cphpage_trvSectionst8")
+		  return
         });
 
 
 
 
         $('body').on('click', '#btnInv', function() {
-          OpenDesignatedLink("ctl00_cphpage_trvSectionst13")
+          OpenDesignatedLink("ctl00_cphpage_trvSectionst12")
+		  return
         });
-		
+
 		$('body').on('click', '#btnWorkList', function() {
           var worklist_link = $("html body div#wrapper form#aspnetForm div#ctl00_updatepanelmain div.menu table tbody tr.menu td div#ctl00_menupanel div#ctl00_Menu1n3Items.ctl00_Menu1_0.IE8Fix.ctl00_Menu1_7 table tbody tr#ctl00_Menu1n9 td table.ctl00_Menu1_6 tbody tr td div.dmenu ul.d1menubar li a")[2];
-		
+
 			console.log(`worklist link is ${worklist_link}`);
-			
+
 			var win = window.open(worklist_link, '_self');
 			win.focus();
-			
+
         });
-			
-		
+
+
     }
 
     function OpenDesignatedLink(tag) {
